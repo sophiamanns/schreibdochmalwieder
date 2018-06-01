@@ -2,6 +2,11 @@
 
 An Application to design letter paper. 
 
+<p align="center">
+  <img width="100%" src="static/schreibdochmalwieder.svg">
+</p>
+
+
 This application provides a small server which lets you design letter paper
 with a subset of the images of the _Graphiksammlung des Eugen Diederichs Verlags_
 dataset. 
