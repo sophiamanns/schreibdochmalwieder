@@ -10,9 +10,13 @@ Zufälliges Briefpapier
 </h2>
 <p>
 	Du siehst Briefpapier Nummer {{ random_id }}.<br />
-	<a href="/letterpaper" class="button">Erneut würfeln</a>
+
 </p>
 <object data="/static/letterpaper/letterpaper_{{ random_id }}.pdf" type="application/pdf" width="100%" height="1200px">
 		<embed src="/static/letterpaper/letterpaper_{{ random_id }}.pdf" type="application/pdf" />
 </object>
+<p>
+	<img src="{{ url_for('static', filename='wuerfel.png') }}" width="40%"/ class="img">
+	<a href="/letterpaper" class="button">Erneut würfeln</a>
+</p>
 {% endblock %}
