@@ -9,7 +9,7 @@ import cairosvg
 
 from os.path import join
 from svgwrite.image import Image
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, redirect, request
 from random import randint
 from helpers import name_to_number, get_assets
 from config import ASSETS_DIR
@@ -20,13 +20,9 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
-@app.route("/paperbyname/")
-@app.route("/paperbyname/<name>")
-def paperbyname(name=None):
-    if not name:
-        return("Sinnlos...")
-    else:
-        return str(name_to_number(name, 58))
+@app.route("/paperbyname/", methods=['POST'])
+def paperbyname():
+    return redirect(url_for('letterpaper')+ "/{}".format(str(name_to_number(request.form['name'], 58))))
 
 @app.route("/letterpaper")
 @app.route("/letterpaper/<int:letterpaper_id>")

@@ -21,9 +21,9 @@ Los geht's
 	<div class="six columns">
 		<p>
 			Finde das passende Briefpapier zu deinem Namen!
-			<form method="get">
-			      <input class="u-full-width" placeholder="Gib hier deinen Namen ein." id="name" type="text">
-						<input class="button" value="Erstellen" type="submit">
+			<form method="post" action="{{ url_for('paperbyname') }}" >
+			    <input class="u-full-width" placeholder="Gib hier deinen Namen ein." name="name" type="text">
+				<input class="button" value="Erstellen" type="submit">
 			</form>
 		</p>
 	</div>
