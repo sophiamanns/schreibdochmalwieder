@@ -1,0 +1,50 @@
+.imprint {
+  text-align: center;
+}
+
+/* Design
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.section {
+  padding: 5rem 0 4rem;
+  text-align: center;
+}
+
+.section-heading,
+.section-description {
+  margin-bottom: 1.2rem;
+}
+
+.categories {
+  background-image: url('background.png');
+  background-size: cover;
+  color: #444;
+}
+
+.categories .section-description {
+  margin-bottom: 2rem;
+}
+
+/* @media (min-width: 550px) {
+  .section {
+    padding: 12rem 0 11rem;
+  }
+
+@media (min-width: 750px) {
+  .section {
+    padding: 14rem 0 17rem;
+  }
+  .section-description {
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .categories {
+    padding: 15rem 0 8rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .section {
+    padding: 20rem 0 19rem;
+  } */
