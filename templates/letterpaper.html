@@ -9,14 +9,16 @@ Zufälliges Briefpapier
 	Alea iacta est
 </h2>
 <p>
-	Du siehst Briefpapier Nummer {{ random_id }}.<br />
+	Du siehst Briefpapier Nummer {{ letterpaper_id }}.<br />
 
 </p>
-<object data="/static/letterpaper/letterpaper_{{ random_id }}.pdf" type="application/pdf" width="100%" height="1200px">
-		<embed src="/static/letterpaper/letterpaper_{{ random_id }}.pdf" type="application/pdf" />
-</object>
 <p>
-	<img src="{{ url_for('static', filename='wuerfel.png') }}" width="40%"/ class="img"><br />
+    <a href="{{ pdf_url }}">
+    <img class="letterpaper" src="{{ img_url }}"/>
+    </a>
+</p>
+<p>
+	<img src="{{ url_for('static', filename='wuerfel.png') }}" class="img"><br />
 	<a href="/letterpaper" class="button">Erneut würfeln</a>
 </p>
 {% endblock %}

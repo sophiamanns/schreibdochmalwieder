@@ -3,9 +3,21 @@
   margin-top: 6rem;
 }
 
+img {
+    width: 100%;
+}
+
 .img {
   margin: 1rem;
+  width: 40%;
 }
+
+.letterpaper {
+    border: 1px solid #ccc;
+    padding: 1px;
+    background-color: #000;
+}
+
 /* Design
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 

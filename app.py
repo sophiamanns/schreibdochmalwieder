@@ -18,7 +18,6 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    print(get_assets())
     return render_template("index.html")
 
 @app.route("/paperbyname/")
@@ -32,6 +31,18 @@ def paperbyname(name=None):
 @app.route("/letterpaper")
 @app.route("/letterpaper/<int:letterpaper_id>")
 def letterpaper(letterpaper_id=None):
+
     if not letterpaper_id:
         letterpaper_id = randint(0, len(get_assets()))
-    return render_template("letterpaper.html", random_id=str(letterpaper_id))
+
+    img_url = url_for('static', filename="letterpaper/letterpaper_{}.png".format(letterpaper_id))
+    pdf_url = url_for('static', filename="letterpaper/letterpaper_{}.pdf".format(letterpaper_id))
+    letterpaper_url = url_for('letterpaper')
+    this_page_url = letterpaper_url + "/{}".format(letterpaper_id)
+
+    return render_template( "letterpaper.html",
+                            letterpaper_id=str(letterpaper_id),
+                            img_url=img_url,
+                            pdf_url=pdf_url,
+                            letterpaper_url=letterpaper_url,
+                            this_page_url=this_page_url)
