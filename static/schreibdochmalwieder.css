@@ -7,6 +7,11 @@ img {
     width: 100%;
 }
 
+.alea {
+  width: 25%;
+  margin: 0.75rem;
+}
+
 .img {
   margin: 1rem;
   width: 40%;
