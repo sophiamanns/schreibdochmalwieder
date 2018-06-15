@@ -20,6 +20,7 @@ FILENAME="filename"
 
 PAPER_WIDTH = 210
 PAPER_HEIGHT = 297
+PAPER_MARGIN = 10
 
 def generate_assets_config(assets_dir=ASSETS_DIR, assets_config_file=ASSETS_CONFIG_FILE):
     """
@@ -62,14 +63,14 @@ fill='white'))
 
         image_dims = (asset_config[WIDTH], asset_config[HEIGHT])
 
-        if image_dims[0] > PAPER_WIDTH:
-            image_dims = tuple(image_dim/(image_dims[0]/PAPER_WIDTH) for image_dim in image_dims)
-        if image_dims[1] > PAPER_HEIGHT:
-            image_dims = tuple(image_dim/(image_dims[1]/PAPER_HEIGHT) for image_dim in image_dims)
+        if image_dims[0] > PAPER_WIDTH-PAPER_MARGIN:
+            image_dims = tuple(image_dim/(image_dims[0]/(PAPER_WIDTH-PAPER_MARGIN)) for image_dim in image_dims)
+        if image_dims[1] > PAPER_HEIGHT-PAPER_MARGIN:
+            image_dims = tuple(image_dim/(image_dims[1]/(PAPER_HEIGHT-PAPER_MARGIN)) for image_dim in image_dims)
 
         image = svgimage(image_path,
                          size=(image_dims),
-                         insert=(0, 0))
+                         insert=(PAPER_MARGIN/2, PAPER_MARGIN/2))
         paper.add(image)
 
         # Save and Convert
