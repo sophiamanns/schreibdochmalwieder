@@ -8,7 +8,7 @@ import svgwrite
 import cairosvg
 
 from PIL import Image
-from os import listdir
+from os import listdir, is_dir, mkdir
 from os.path import join
 from config import ASSETS_DIR, ASSETS_CONFIG_FILE, LETTERPAPER_DIR
 from helpers import get_assets
@@ -54,11 +54,16 @@ def generate_letterpaper():
         paper.save()
         cairosvg.svg2pdf(url=svg_path, write_to=pdf_path)
 
+def make_letterpaper_dir(letterpaper_dir=letterpaper_dir):
+    if not is_dir(letterpaper_dir):
+        mkdir(letterpaper_dir)
+
 def main():
     """
     All setup functions are to be put here.
     """
     generate_assets_config()
+    make_letterpaper_dir()
     generate_letterpaper()
 
 
