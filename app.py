@@ -25,8 +25,11 @@ def paperbyname():
     return redirect(url_for('letterpaper')+ "/{}".format(str(name_to_number(request.form['name'], 58))))
 
 @app.route("/letterpaper")
+def letterpaper():
+    return redirect(url_for('letterpaper')+ "/{}".format(str(randint(0, len(get_assets())))))
+
 @app.route("/letterpaper/<int:letterpaper_id>")
-def letterpaper(letterpaper_id=None):
+def letterpaper_with_id(letterpaper_id=None):
 
     if not letterpaper_id:
         letterpaper_id = randint(0, len(get_assets()))
