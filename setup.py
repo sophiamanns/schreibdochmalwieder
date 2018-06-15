@@ -4,11 +4,19 @@ This file is supposed to be run before executing the server for the first time. 
 the configuration for the assets.
 """
 import json
+import svgwrite
+import cairosvg
 
 from PIL import Image
 from os import listdir
 from os.path import join
-from config import ASSETS_DIR, ASSETS_CONFIG_FILE
+from config import ASSETS_DIR, ASSETS_CONFIG_FILE, LETTERPAPER_DIR
+from helpers import get_assets
+from svgwrite.image import Image as svgimage
+
+WIDTH='width'
+HEIGHT='height'
+FILENAME="filename"
 
 def generate_assets_config(assets_dir=ASSETS_DIR, assets_config_file=ASSETS_CONFIG_FILE):
     """
@@ -19,19 +27,39 @@ def generate_assets_config(assets_dir=ASSETS_DIR, assets_config_file=ASSETS_CONF
     for filename in listdir(assets_dir):
         print("Generating config for {}".format(filename))
         with Image.open(join(assets_dir, filename)) as im:
-            config.append({  'width': im.size[0],
-                        'height': im.size[1],
-                        'filename': filename})
+            config.append({  WIDTH: im.size[0],
+                             HEIGHT: im.size[1],
+                             FILENAME: filename})
 
     with open(assets_config_file, "w") as outfile:
         json.dump(config, outfile, indent=4)
 
+def generate_letterpaper():
+    """
+    This function generates the letterpaper from the assets.
+    """
+    for n_asset, asset_config in enumerate(get_assets()):
+        filename = "letterpaper_{}".format(n_asset)
+        svg_filename = "{}.svg".format(filename)
+        pdf_filename = "{}.pdf".format(filename)
+        svg_path = join(LETTERPAPER_DIR, svg_filename)
+        pdf_path = join(LETTERPAPER_DIR, pdf_filename)
+
+        print("Generating {} from {}".format(pdf_path, asset_config[FILENAME]))
+
+        paper = svgwrite.Drawing(svg_path, size=("210mm", "297mm"), viewBox=("0 0 210 297"))
+        image_path = join(ASSETS_DIR, asset_config[FILENAME])
+        image = svgimage(image_path, size=(asset_config[WIDTH], asset_config[HEIGHT]), insert=(0, 0))
+        paper.add(image)
+        paper.save()
+        cairosvg.svg2pdf(url=svg_path, write_to=pdf_path)
 
 def main():
     """
     All setup functions are to be put here.
     """
     generate_assets_config()
+    generate_letterpaper()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+Zufälliges Briefpapier
+{% endblock %}
+
+{% block content %}
+<h2>
+	Alea iacta est
+</h2>
+<p>
+	Du siehst Briefpapier Nummer {{ random_id }}.<br />
+	<a href="/letterpaper" class="button">Erneut würfeln</a>
+</p>
+<object data="static/letterpaper/letterpaper_{{ random_id }}.pdf" type="application/pdf" width="100%" height="1200px">
+		<embed src="static/letterpaper/letterpaper_{{ random_id }}.pdf" type="application/pdf" />
+</object>
+{% endblock %}

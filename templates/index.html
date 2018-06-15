@@ -14,13 +14,14 @@ Los geht's
 	<div class="six columns">
 		<p>
 			Finde spannende Muster mithilfe des Generators.
-			<a href="letterpaper" class="button">Los geht's</a>
+			<img src="{{ url_for('static', filename='wuerfel.png') }}" width="40%"/>
+			<a href="letterpaper" class="button">Überlasse es dem Zufall!</a>
 		</p>
 	</div>
 	<div class="six columns">
 		<p>
 			Finde das passende Briefpapier zu deinem Namen!
-			<form method=>
+			<form method="get">
 			      <input class="u-full-width" placeholder="Gib hier deinen Namen ein." id="name" type="text">
 						<input class="button" value="Erstellen" type="submit">
 			</form>

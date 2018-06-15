@@ -30,15 +30,8 @@ def paperbyname(name=None):
         return str(name_to_number(name, 58))
 
 @app.route("/letterpaper")
-def letterpaper():
-    assets = get_assets()
-    random_id = randint(0, len(assets))
-    asset_config = assets[random_id]
-
-    paper = svgwrite.Drawing("test.svg", size=("210mm", "297mm"), viewBox=("0 0 210 297"))
-    image_path = join(ASSETS_DIR, asset_config['filename'])
-    image = Image(image_path, size=(asset_config['width'], asset_config['height']), insert=(0, 0))
-    paper.add(image)
-    paper.save()
-    cairosvg.svg2pdf(url="test.svg", write_to="test.pdf")
-    return str(random_id)
+@app.route("/letterpaper/<int:letterpaper_id>")
+def letterpaper(letterpaper_id=None):
+    if not letterpaper_id:
+        letterpaper_id = randint(0, len(get_assets()))
+    return render_template("letterpaper.html", random_id=str(letterpaper_id))
