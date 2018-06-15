@@ -18,6 +18,9 @@ WIDTH='width'
 HEIGHT='height'
 FILENAME="filename"
 
+PAPER_WIDTH = 210
+PAPER_HEIGHT = 297
+
 def generate_assets_config(assets_dir=ASSETS_DIR, assets_config_file=ASSETS_CONFIG_FILE):
     """
     This function generates a json file in the BASE_DIR where the principal
@@ -56,7 +59,17 @@ fill='white'))
 
         # Add Pattern or Background
         image_path = join(ASSETS_DIR, asset_config[FILENAME])
-        image = svgimage(image_path, size=(asset_config[WIDTH], asset_config[HEIGHT]), insert=(0, 0))
+
+        image_dims = (asset_config[WIDTH], asset_config[HEIGHT])
+
+        if image_dims[0] > PAPER_WIDTH:
+            image_dims = tuple(image_dim/(image_dims[0]/PAPER_WIDTH) for image_dim in image_dims)
+        if image_dims[1] > PAPER_HEIGHT:
+            image_dims = tuple(image_dim/(image_dims[1]/PAPER_HEIGHT) for image_dim in image_dims)
+
+        image = svgimage(image_path,
+                         size=(image_dims),
+                         insert=(0, 0))
         paper.add(image)
 
         # Save and Convert
