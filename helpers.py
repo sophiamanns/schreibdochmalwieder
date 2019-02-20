@@ -27,7 +27,7 @@ def name_to_number(name, n_max):
         Out[37]: 29
     """
     normal_name = name.lower().strip()
-    hash = sha512(name.encode("utf-8")).hexdigest()
+    hash = sha512(normal_name.encode("utf-8")).hexdigest()
     for l in "abcdef":
         hash = hash.replace(l, "")
     n_exp = len(str(n_max))
