@@ -17,6 +17,7 @@ from svgwrite.image import Image as svgimage
 WIDTH = 'width'
 HEIGHT = 'height'
 FILENAME = 'filename'
+OPACITY = 'opacity'
 
 PAPER_WIDTH = 210
 PAPER_HEIGHT = 297
@@ -34,7 +35,8 @@ def generate_assets_config(assets_dir=ASSETS_DIR, assets_config_file=ASSETS_CONF
         with Image.open(join(assets_dir, filename)) as im:
             config.append({WIDTH: im.size[0],
                            HEIGHT: im.size[1],
-                           FILENAME: filename})
+                           FILENAME: filename,
+                           OPACITY: 1.0})
 
     with open(assets_config_file, "w") as outfile:
         json.dump(config, outfile, indent=4)
@@ -80,7 +82,8 @@ def generate_letterpaper():
 
         image = svgimage(image_path,
                          size=(image_dims),
-                         insert=(PAPER_MARGIN/2, PAPER_MARGIN/2))
+                         insert=(PAPER_MARGIN/2, PAPER_MARGIN/2),
+                         opacity=asset_config[OPACITY])
         paper.add(image)
 
         # Save and Convert
