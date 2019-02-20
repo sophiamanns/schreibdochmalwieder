@@ -14,29 +14,31 @@ from config import ASSETS_DIR, ASSETS_CONFIG_FILE, LETTERPAPER_DIR
 from helpers import get_assets
 from svgwrite.image import Image as svgimage
 
-WIDTH='width'
-HEIGHT='height'
-FILENAME="filename"
+WIDTH = 'width'
+HEIGHT = 'height'
+FILENAME = 'filename'
 
 PAPER_WIDTH = 210
 PAPER_HEIGHT = 297
 PAPER_MARGIN = 10
+
 
 def generate_assets_config(assets_dir=ASSETS_DIR, assets_config_file=ASSETS_CONFIG_FILE):
     """
     This function generates a json file in the BASE_DIR where the principal
     dimensions of all images/assets are put.
     """
-    config=list()
+    config = list()
     for filename in listdir(assets_dir):
         print("Generating config for {}".format(filename))
         with Image.open(join(assets_dir, filename)) as im:
-            config.append({  WIDTH: im.size[0],
-                             HEIGHT: im.size[1],
-                             FILENAME: filename})
+            config.append({WIDTH: im.size[0],
+                           HEIGHT: im.size[1],
+                           FILENAME: filename})
 
     with open(assets_config_file, "w") as outfile:
         json.dump(config, outfile, indent=4)
+
 
 def generate_letterpaper():
     """
@@ -55,8 +57,9 @@ def generate_letterpaper():
         paper = svgwrite.Drawing(svg_path, size=("210mm", "297mm"), viewBox=("0 0 210 297"))
 
         # make bg white
-        paper.add(paper.rect(insert=(0*svgwrite.mm, 0*svgwrite.mm), size=(210*svgwrite.mm, 297*svgwrite.mm),
-fill='white'))
+        paper.add(paper.rect(insert=(0*svgwrite.mm, 0*svgwrite.mm),
+                  size=(210*svgwrite.mm, 297*svgwrite.mm),
+                  fill='white'))
 
         # Add Pattern or Background
         image_path = join(ASSETS_DIR, asset_config[FILENAME])
@@ -64,9 +67,16 @@ fill='white'))
         image_dims = (asset_config[WIDTH], asset_config[HEIGHT])
 
         if image_dims[0] > PAPER_WIDTH-PAPER_MARGIN:
-            image_dims = tuple(image_dim/(image_dims[0]/(PAPER_WIDTH-PAPER_MARGIN)) for image_dim in image_dims)
+            image_dims = tuple(
+                    image_dim/(image_dims[0]/(PAPER_WIDTH-PAPER_MARGIN))
+                    for image_dim in image_dims
+            )
+
         if image_dims[1] > PAPER_HEIGHT-PAPER_MARGIN:
-            image_dims = tuple(image_dim/(image_dims[1]/(PAPER_HEIGHT-PAPER_MARGIN)) for image_dim in image_dims)
+            image_dims = tuple(
+                    image_dim/(image_dims[1]/(PAPER_HEIGHT-PAPER_MARGIN))
+                    for image_dim in image_dims
+            )
 
         image = svgimage(image_path,
                          size=(image_dims),
@@ -78,9 +88,11 @@ fill='white'))
         cairosvg.svg2pdf(url=svg_path, write_to=pdf_path)
         cairosvg.svg2png(url=svg_path, write_to=png_path)
 
+
 def make_letterpaper_dir(letterpaper_dir=LETTERPAPER_DIR):
     if not isdir(letterpaper_dir):
         mkdir(letterpaper_dir)
+
 
 def main():
     """
