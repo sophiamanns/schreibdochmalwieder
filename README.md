@@ -112,6 +112,6 @@ You should now be able to reach the server at https://localhost:5000
 
 ## Collaborators
 
-* Annika Domin
+* Annika Schröer
 * Sophia Manns
 * Florian Rämisch
