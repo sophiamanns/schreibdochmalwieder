@@ -11,3 +11,7 @@ run:	## Run the development Server
 .PHONY: lint
 lint:	## Lint the code
 	flake8 .
+
+.PHONY: generate-letterpaper
+generate-letterpaper: ## Has to be run initially to generate the letterpaper from the images
+	python generate_letterpaper.py
