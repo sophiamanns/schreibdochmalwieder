@@ -6,12 +6,12 @@ help:	## Show this help
 
 .PHONY:
 run:	## Run the development Server
-	flask run
+	cd schreibdochmalwieder && flask run
 
 .PHONY: lint
 lint:	## Lint the code
-	flake8 .
+	flake8 schreibdochmalwieder
 
 .PHONY: generate-letterpaper
 generate-letterpaper: ## Has to be run initially to generate the letterpaper from the images
-	python generate_letterpaper.py
+	python schreibdochmalwieder/generate_letterpaper.py
