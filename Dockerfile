@@ -12,7 +12,7 @@ RUN pip install -r /srv/deploy/requirements.txt \
 		-r /srv/deploy/requirements-src.txt
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-COPY deploy/nginx.conf /etc/nginx/site-available/default
+COPY deploy/nginx.conf /etc/nginx/sites-available/default
 
 ADD deploy /srv/deploy
 
