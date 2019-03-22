@@ -15,3 +15,19 @@ lint:	## Lint the code
 .PHONY: generate-letterpaper
 generate-letterpaper: ## Has to be run initially to generate the letterpaper from the images
 	python schreibdochmalwieder/generate_letterpaper.py
+
+.PHONY: docker
+docker: ## Test deployment in a docker container
+	docker build -t "olf42:schreibdochmalwieder" .
+	docker run \
+		-p 8000:8000 \
+		-p 8001:8001 \
+		--rm \
+		--name schreibdochmalwieder 
+		-d \
+		olf42:schreibdochmalwieder
+
+.PHONY: docker-compose
+docker-compose: ## Test deployment in a docker container via the docker compose file
+	docker-compose build
+	docker-compose up -d
