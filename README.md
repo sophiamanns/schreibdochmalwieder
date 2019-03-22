@@ -3,7 +3,7 @@
 An Application to design letter paper. 
 
 <p align="center">
-  <img width="100%" src="static/schreibdochmalwieder.svg">
+  <img width="100%" src="schreibdochmalwieder/static/schreibdochmalwieder.svg">
 </p>
 
 
