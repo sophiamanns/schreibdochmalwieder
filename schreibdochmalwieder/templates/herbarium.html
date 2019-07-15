@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+Sags mit einer Blume
+{% endblock %}
+
+
+{% block content %}
+<p>Blume sind richtig nice Objekte die die Natur für uns bereit hält. Vor vielen Jahren hat sich
+ein Naturforscher die Mühe gemacht viele davon zu sammeln, zu trocknen und in ein Buch zu kleben.
+Jetzt wurde es eingescannt, und man kann es jetzt auf tote Pflanzen wieder ausdrucken. Quasi erneut
+zum Leben erwecken. Weil es auch früher schon richtig viele geile Blumen gab haben wir die besten
+hier zusammengetragen und mit Hilfe modernster Technik druckfertig aufbereitet. 
+Legt einfach los!<br />
+</p>
+
+{% for image_row in image_preview %}
+<div class="row">
+    {% for image in image_row %}
+        <div class="two columns">
+            <img src="{{image}}" />
+        </div>
+    {% endfor %}
+    <br>
+</div>
+{% endfor %}
+{% endblock %}

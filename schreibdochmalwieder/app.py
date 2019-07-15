@@ -4,9 +4,11 @@ This is the application file. It contains the main program and
 is meant to be executed
 """
 
+from pathlib import Path
 from flask import Flask, render_template, url_for, redirect, request
 from random import randint
 from helpers import name_to_number, get_assets
+from config import HERBARIUM_LETTERPAPER_DIR, BASE_DIR
 
 app = Flask(__name__)
 
@@ -14,6 +16,20 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/herbarium")
+def herbarium():
+    h_path = Path(HERBARIUM_LETTERPAPER_DIR)
+    image_preview = []
+    row = []
+    for i, image in enumerate(h_path.glob("*.png")):
+        row.append(image.relative_to(BASE_DIR))
+        if i+1%6 == 0:
+            image_preview.append(row)
+            row = []
+    image_preview.append(row)
+    return render_template("herbarium.html", image_preview=image_preview)
 
 
 @app.route("/paperbyname/", methods=['POST'])
