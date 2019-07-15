@@ -6,6 +6,7 @@ the configuration for the assets.
 import json
 import svgwrite
 import cairosvg
+import click
 
 from PIL import Image
 from os import listdir, mkdir
@@ -24,7 +25,8 @@ PAPER_HEIGHT = 297
 PAPER_MARGIN = 10
 
 
-def generate_assets_config(assets_dir=ASSETS_DIR, assets_config_file=ASSETS_CONFIG_FILE):
+def generate_assets_config(assets_dir=ASSETS_DIR, assets_config_file=ASSETS_CONFIG_FILE,
+        opacity=1.0):
     """
     This function generates a json file in the BASE_DIR where the principal
     dimensions of all images/assets are put.
@@ -36,13 +38,16 @@ def generate_assets_config(assets_dir=ASSETS_DIR, assets_config_file=ASSETS_CONF
             config.append({WIDTH: im.size[0],
                            HEIGHT: im.size[1],
                            FILENAME: filename,
-                           OPACITY: 1.0})
+                           OPACITY: opacity})
 
     with open(assets_config_file, "w") as outfile:
         json.dump(config, outfile, indent=4)
 
 
-def generate_letterpaper():
+def generate_letterpaper(
+        letterpaper_dir=LETTERPAPER_DIR,
+        assets_dir=ASSETS_DIR,
+        assets_config=ASSETS_CONFIG_FILE):
     """
     This function generates the letterpaper from the assets.
     """
@@ -51,9 +56,9 @@ def generate_letterpaper():
         svg_filename = "{}.svg".format(filename)
         pdf_filename = "{}.pdf".format(filename)
         png_filename = "{}.png".format(filename)
-        svg_path = join(LETTERPAPER_DIR, svg_filename)
-        pdf_path = join(LETTERPAPER_DIR, pdf_filename)
-        png_path = join(LETTERPAPER_DIR, png_filename)
+        svg_path = join(letterpaper_dir, svg_filename)
+        pdf_path = join(letterpaper_dir, pdf_filename)
+        png_path = join(letterpaper_dir, png_filename)
 
         print("Generating {} from {}".format(pdf_path, asset_config[FILENAME]))
         paper = svgwrite.Drawing(svg_path, size=("210mm", "297mm"), viewBox=("0 0 210 297"))
@@ -96,13 +101,17 @@ def make_letterpaper_dir(letterpaper_dir=LETTERPAPER_DIR):
     if not isdir(letterpaper_dir):
         mkdir(letterpaper_dir)
 
-
-def main():
+@click.command()
+@click.option("--letterpaper-dir", default=LETTERPAPER_DIR)
+@click.option("--opacity", default=1.0, type=float)
+@click.argument("assets_dir", type=click.Path(exists=True))
+@click.argument("assets_config")
+def main(letterpaper_dir, opacity, assets_dir, assets_config):
     """
     All setup functions are to be put here.
     """
-    generate_assets_config()
-    make_letterpaper_dir()
+    generate_assets_config(assets_dir, assets_config)
+    make_letterpaper_dir(letterpaper_dir)
     generate_letterpaper()
 
 
