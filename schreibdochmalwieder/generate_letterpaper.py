@@ -114,7 +114,7 @@ def main(letterpaper_dir, opacity, assets_dir, assets_config):
     cwd = Path.cwd()
     assets_dir = cwd / assets_dir
     assets_config = cwd / assets_config
-    generate_assets_config(assets_dir, assets_config)
+    generate_assets_config(assets_dir, assets_config, opacity)
     make_letterpaper_dir(letterpaper_dir)
     generate_letterpaper(letterpaper_dir, assets_dir, assets_config)
 

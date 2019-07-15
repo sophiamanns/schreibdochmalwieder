@@ -14,7 +14,8 @@ lint:	## Lint the code
 
 .PHONY: generate-letterpaper
 generate-letterpaper: ## Has to be run initially to generate the letterpaper from the images
-	python schreibdochmalwieder/generate_letterpaper.py
+	cd schreibdochmalwieder; ./generate_letterpaper.py --letterpaper-dir static/herbarium_letterpaper --opacity 0.1 static/herbarium/band_3 herbarium_config.json
+	cd schreibdochmalwieder; ./generate_letterpaper.py --letterpaper-dir static/letterpaper static/assets assets_config.json
 
 .PHONY: docker
 docker: ## Test deployment in a docker container
