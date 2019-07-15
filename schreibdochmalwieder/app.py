@@ -23,8 +23,10 @@ def herbarium():
     h_path = Path(HERBARIUM_LETTERPAPER_DIR)
     image_preview = []
     row = []
-    for i, image in enumerate(h_path.glob("*.png")):
-        row.append(image.relative_to(BASE_DIR))
+    for i, image in enumerate(h_path.glob("*_thumb.png")):
+        image = {"image_id": i,
+                 "image_url": image.relative_to(BASE_DIR)}
+        row.append(image)
         if i+1%6 == 0:
             image_preview.append(row)
             row = []
@@ -45,6 +47,23 @@ def letterpaper():
             url_for('letterpaper') + "/{}".format(str(randint(0, len(get_assets()))))
     )
 
+@app.route("/herbarium_letterpaper/<int:letterpaper_id>")
+def herbarium_letterpaper_with_id(letterpaper_id=None):
+
+    if not letterpaper_id:
+        letterpaper_id = randint(0, len(get_assets()))
+
+    img_url = url_for('static', filename="herbarium_letterpaper/letterpaper_{}.png".format(letterpaper_id))
+    pdf_url = url_for('static', filename="herbarium_letterpaper/letterpaper_{}.pdf".format(letterpaper_id))
+    letterpaper_url = url_for('letterpaper')
+    this_page_url = f"herbarium_letterpaper/{letterpaper_id}"
+
+    return render_template("letterpaper.html",
+                           letterpaper_id=str(letterpaper_id),
+                           img_url=img_url,
+                           pdf_url=pdf_url,
+                           letterpaper_url=letterpaper_url,
+                           this_page_url=this_page_url)
 
 @app.route("/letterpaper/<int:letterpaper_id>")
 def letterpaper_with_id(letterpaper_id=None):

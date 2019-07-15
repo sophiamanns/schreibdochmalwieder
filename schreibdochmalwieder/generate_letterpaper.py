@@ -57,9 +57,11 @@ def generate_letterpaper(
         svg_filename = "{}.svg".format(filename)
         pdf_filename = "{}.pdf".format(filename)
         png_filename = "{}.png".format(filename)
+        thumb_filename = "{}_thumb.png".format(filename)
         svg_path = join(letterpaper_dir, svg_filename)
         pdf_path = join(letterpaper_dir, pdf_filename)
         png_path = join(letterpaper_dir, png_filename)
+        thumb_path = join(letterpaper_dir, thumb_filename)
 
         print("Generating {} from {}".format(pdf_path, asset_config[FILENAME]))
         paper = svgwrite.Drawing(svg_path, size=("210mm", "297mm"), viewBox=("0 0 210 297"))
@@ -96,6 +98,7 @@ def generate_letterpaper(
         paper.save()
         cairosvg.svg2pdf(url=svg_path, write_to=pdf_path)
         cairosvg.svg2png(url=svg_path, write_to=png_path)
+        cairosvg.svg2png(url=svg_path, write_to=thumb_path, scale=0.1)
 
 
 def make_letterpaper_dir(letterpaper_dir=LETTERPAPER_DIR):
