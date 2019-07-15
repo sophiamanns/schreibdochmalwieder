@@ -3,3 +3,4 @@
 *.pyo
 schreibdochmalwieder/static/letterpaper
 schreibdochmalwieder/assets_config.json
+materials/*
