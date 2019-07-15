@@ -2,5 +2,7 @@
 *.pyc
 *.pyo
 schreibdochmalwieder/static/letterpaper
+schreibdochmalwieder/static/herbarium_letterpaper
 schreibdochmalwieder/assets_config.json
+schreibdochmalwieder/herbarium_config.json
 materials/*
