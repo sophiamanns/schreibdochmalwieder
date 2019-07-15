@@ -8,6 +8,7 @@ import svgwrite
 import cairosvg
 import click
 
+from pathlib import Path
 from PIL import Image
 from os import listdir, mkdir
 from os.path import join, isdir
@@ -51,7 +52,7 @@ def generate_letterpaper(
     """
     This function generates the letterpaper from the assets.
     """
-    for n_asset, asset_config in enumerate(get_assets()):
+    for n_asset, asset_config in enumerate(get_assets(assets_dir, assets_config)):
         filename = "letterpaper_{}".format(n_asset)
         svg_filename = "{}.svg".format(filename)
         pdf_filename = "{}.pdf".format(filename)
@@ -69,7 +70,7 @@ def generate_letterpaper(
                   fill='white'))
 
         # Add Pattern or Background
-        image_path = join(ASSETS_DIR, asset_config[FILENAME])
+        image_path = join(assets_dir, asset_config[FILENAME])
 
         image_dims = (asset_config[WIDTH], asset_config[HEIGHT])
 
@@ -110,9 +111,12 @@ def main(letterpaper_dir, opacity, assets_dir, assets_config):
     """
     All setup functions are to be put here.
     """
+    cwd = Path.cwd()
+    assets_dir = cwd / assets_dir
+    assets_config = cwd / assets_config
     generate_assets_config(assets_dir, assets_config)
     make_letterpaper_dir(letterpaper_dir)
-    generate_letterpaper()
+    generate_letterpaper(letterpaper_dir, assets_dir, assets_config)
 
 
 if __name__ == "__main__":

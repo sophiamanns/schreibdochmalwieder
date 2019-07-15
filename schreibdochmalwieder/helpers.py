@@ -47,7 +47,7 @@ def map_range(n, n_exp, n_max):
     return int(n*n_max/(10**n_exp-1))
 
 
-def get_assets(assets_config_file=ASSETS_CONFIG_FILE, assets_dir=ASSETS_DIR):
+def get_assets(assets_dir=ASSETS_DIR, assets_config_file=ASSETS_CONFIG_FILE):
     with open(assets_config_file) as infile:
         assets_config = json.load(infile)
     return assets_config
