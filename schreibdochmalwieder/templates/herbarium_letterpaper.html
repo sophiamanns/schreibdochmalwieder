@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+Pflanzliches Briefpapier
+{% endblock %}
+
+{% block content %}
+<h2>
+	Pflanzliches Briefpapier
+</h2>
+<p>
+	Du siehst Briefpapier Nummer {{ letterpaper_id }}.<br />
+    	Das Originalbild findest du bei <a href="http://digishelf.de/objekt/796933170/{{ letterpaper_orig_id }}" target="_blank">digishelf</a>.
+
+</p>
+<p>
+    <a href="{{ pdf_url }}">
+    <img class="letterpaper" src="{{ img_url }}"/>
+    </a>
+</p>
+<p>
+	Mal beim <a href="//www.gleimhaus.de">Gleimhaus</a> vorbeischauen?<br />
+	<a href="{{ url_for('herbarium')}}#{{ letterpaper_id }}" class="button">Zurück zur Übersicht</a>
+</p>
+{% endblock %}

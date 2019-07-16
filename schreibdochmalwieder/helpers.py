@@ -4,7 +4,6 @@ This file contains helper functions to be used by the schreibdochmalwieder packa
 """
 import json
 from hashlib import sha512
-from config import ASSETS_DIR, ASSETS_CONFIG_FILE
 
 
 def name_to_number(name, n_max):
@@ -44,10 +43,10 @@ def map_range(n, n_exp, n_max):
     E.g. if n=99, and n_max=58, then the range 0 - 99 will be mapped to integer numbers
     between 0 and 58.
     """
-    return int(n*n_max/(10**n_exp-1))
+    return int(n * n_max / (10 ** n_exp - 1))
 
 
-def get_assets(assets_dir=ASSETS_DIR, assets_config_file=ASSETS_CONFIG_FILE):
+def get_assets(assets_dir, assets_config_file):
     with open(assets_config_file) as infile:
         assets_config = json.load(infile)
     return assets_config
