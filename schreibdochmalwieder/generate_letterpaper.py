@@ -91,7 +91,7 @@ def generate_letterpaper(
         image = svgimage(image_path,
                          size=(image_dims),
                          insert=(PAPER_MARGIN/2, PAPER_MARGIN/2),
-                         opacity=asset_config[OPACITY])
+                         style=f"opacity:{asset_config[OPACITY]}")
         paper.add(image)
 
         # Save and Convert
