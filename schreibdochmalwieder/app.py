@@ -35,7 +35,7 @@ def herbarium():
         image = {
             "image_id": i,
             "image_url": url_for(
-                "static", filename=f"{h_path}/letterpaper_{i}_thumb.png"
+            "static", filename="{}/letterpaper_{}_thumb.png".format(h_path, i)
             ),
         }
         row.append(image)
@@ -54,12 +54,6 @@ def paperbyname():
     )
 
 
-@app.route("/letterpaper")
-def letterpaper():
-    return redirect(
-        url_for("letterpaper") + "/{}".format(str(randint(0, len(get_assets()))))
-    )
-
 
 @app.route("/herbarium_letterpaper/<int:letterpaper_id>")
 def herbarium_letterpaper_with_id(letterpaper_id=None):
@@ -77,7 +71,6 @@ def herbarium_letterpaper_with_id(letterpaper_id=None):
         "static",
         filename="herbarium_letterpaper/letterpaper_{}.pdf".format(letterpaper_id),
     )
-    this_page_url = f"herbarium_letterpaper/{letterpaper_id}"
 
     return render_template(
         "herbarium_letterpaper.html",
@@ -85,7 +78,13 @@ def herbarium_letterpaper_with_id(letterpaper_id=None):
         img_url=img_url,
         pdf_url=pdf_url,
         letterpaper_orig_id=orig_id,
-        this_page_url=this_page_url,
+    )
+
+
+@app.route("/letterpaper")
+def letterpaper():
+    return redirect(
+        url_for("letterpaper") + "/{}".format(str(randint(0, len(diederich_assets))))
     )
 
 
@@ -101,12 +100,10 @@ def letterpaper_with_id(letterpaper_id=None):
     pdf_url = url_for(
         "static", filename="letterpaper/letterpaper_{}.pdf".format(letterpaper_id)
     )
-    this_page_url = letterpaper_url + "/{}".format(letterpaper_id)
 
     return render_template(
         "letterpaper.html",
         letterpaper_id=str(letterpaper_id),
         img_url=img_url,
         pdf_url=pdf_url,
-        this_page_url=this_page_url,
     )
