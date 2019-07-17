@@ -24,7 +24,7 @@ docker: ## Test deployment in a docker container
 		-p 8000:8000 \
 		-p 8001:8001 \
 		--rm \
-		--name schreibdochmalwieder 
+		--name schreibdochmalwieder \
 		-d \
 		olf42:schreibdochmalwieder
 
