@@ -12,7 +12,7 @@ This project was created during, and entered into the compition of the
 culture hackathon [Coding Da Vinci Ost 2018](https://codingdavinci.de/events/ost) from April - June 2018 
 at the Leipzig University Library. 
 
-## Prequisites
+## Prerequisites
 
 This software is developed with and for Python3.6.
 
@@ -20,18 +20,16 @@ The recommended deployment method is via docker and docker-compose.
 Please refer to the [official docker compose documentation](https://docs.docker.com/compose/install/) for more 
 information on how to setup *docker compose* on your machine. 
 
-## Prerequisites
-
 You need *git* to checkout the latest version of *schreibdochmalwieder* from github and *Python3* to generate
 the assets.
-
-## Deployment
 
 Clone the repository using git.
 
 ```zsh
 $ git clone https://github.com/sophiamanns/schreibdochmalwieder
 ```
+
+## Deployment
 
 Install the requirements
 
@@ -51,6 +49,11 @@ $ docker-compose up -d
 ```
 
 Alternatively you can use the method from *Makefile* to perform all of the above steps, except the cloning
+
+## Quick Deployment
+
+Invoke the following command after cloning the repo to perform all steps required to run access your 
+personal version of *schreibdochmalwieder* on your machine at http://localhost:8000
 
 ```zsh
 $ make all
