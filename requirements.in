@@ -1,4 +1,4 @@
-Pillow==6.1.0
+Pillow==6.2.0
 cairosvg==2.3.1
 Flask==1.1.1
 svgwrite==1.1.12
