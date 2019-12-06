@@ -10,12 +10,12 @@ cffi==1.13.2              # via cairocffi
 click==7.0
 cssselect2==0.2.2         # via cairosvg, svglib
 defusedxml==0.6.0         # via cairosvg
-flask==1.0.2
+flask==1.1.1
 itsdangerous==1.1.0       # via flask
 jinja2==2.10.3            # via flask
 lxml==4.4.2               # via svglib
 markupsafe==1.1.1         # via jinja2
-pillow==5.1.0
+pillow==6.1.0
 pycparser==2.19           # via cffi
 pyparsing==2.4.5          # via svgwrite
 reportlab==3.5.32         # via svglib

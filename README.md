@@ -1,110 +1,68 @@
 # schreibdochmalwieder
 
-An Application to design letter paper. 
+An Application to create custom letter paper from digitized herbarium data of
+[Gleimhaus](https://www.gleimhaus.de) and graphical artworks of *Eugen Diederichs Verlag* at [ThULB](https://www.thulb.uni-jena.de/).
+The authors of this software provide access to an instance of this software at [schreibdochmalwieder.trollofix.com](https://schreibdochmalwieder.trollofix.com).
 
 <p align="center">
   <img width="100%" src="schreibdochmalwieder/static/schreibdochmalwieder.svg">
 </p>
 
+This project was created during, and entered into the compition of the 
+culture hackathon [Coding Da Vinci Ost 2018](https://codingdavinci.de/events/ost) from April - June 2018 
+at the Leipzig University Library. 
 
-This application provides a small server which lets you design letter paper
-with a subset of the images of the _Graphiksammlung des Eugen Diederichs Verlags_
-dataset. 
-
-This project is meant to be entered into the competition of [Coding Da Vinci Ost 2018](https://codingdavinci.de/events/ost).
-
-## Prequisites
+## Prerequisites
 
 This software is developed with and for Python3.6.
 
-## Installation
+The recommended deployment method is via docker and docker-compose. 
+Please refer to the [official docker compose documentation](https://docs.docker.com/compose/install/) for more 
+information on how to setup *docker compose* on your machine. 
 
-Create a new virtual environment
+You need *git* to checkout the latest version of *schreibdochmalwieder* from github and *Python3* to generate
+the assets.
+
+Clone the repository using git.
 
 ```zsh
-$ mkvirtualenv schreibdochmalwieder -p /usr/bin/python3
+$ git clone https://github.com/sophiamanns/schreibdochmalwieder
 ```
 
-Install the dependencies
+## Deployment
+
+Install the requirements
 
 ```zsh
 $ pip install -r requirements.txt
 ```
 
-## Usage
-
-Run the server.
-
-```zsh
-$ flask run
+Build the assets
+```zsh 
+$ make generate-letterpaper
 ```
 
-## Yolo Deployment
-
-The server can easily be installed as a systemd service. 
-For a small service like that the web server provided with flask should be sufficient. 
-A more advanced deployment would be with an application server like gunicorn
-and a webserver/reverse proxy like caddy.
-
-For the "easy" deployment, create a file e.g. named "schreibdochmalwieder.sh" 
-in your homedir with the following contents:
+Build and run the container:
 
 ```zsh
-#!/usr/bin/zsh
-
-# CONSTANTS
-HOME=<YOUR HOMEDIR HERE>
-VENVNAME=schreibdochmalwieder
-VENVDIR=${HOME}/.virtualenvs/${VENVNAME}
-APPDIR=${HOME}/<PATH TO THE APPLICATION HERE>
-APPNAME=app.py
-
-# ACTIVATE THE VIRTUALENV
-source ${VENVDIR}/bin/activate
-
-# START THE APPLICATION
-cd $APPDIR
-flask run
+$ docker-compose up -d
 ```
-If you did that, make it executable.
+
+Alternatively you can use the method from *Makefile* to perform all of the above steps, except the cloning
+
+## Quick Deployment
+
+Invoke the following command after cloning the repo to perform all steps required to run access your 
+personal version of *schreibdochmalwieder* on your machine at http://localhost:8000
 
 ```zsh
-$ chmod 755 schreibdochmalwieder.sh
+$ make all
 ```
 
-Then create the systemd-service file
+## Development
 
-```zsh
-$ touch /etc/systemd/system/schreibdochmalwieder.service
-```
-
-with the following contents:
-
-```zsh
-[Unit]
-Description=schreibdochmalwieder
-After=network.target
-
-[Service]
-Type=simple
-User=<YOUR USERNAME HERE!>
-ExecStart=/home/olf/schreibdochmalwieder.sh
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Make it executable. Run it and make it run even if the server restarts.
-
-```zsh
-$ systemctl daemon-reload
-$ systemctl start schreibdochmalwieder.service
-$ systemctl enable schreibdochmalwieder.service
-```
-
-You should now be able to reach the server at https://localhost:5000
-
+You are welcome to this project with your contribution, either by adding additional content, creating new features
+or fixing bugs. 
 
 ## License
 

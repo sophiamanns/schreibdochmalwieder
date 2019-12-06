@@ -32,3 +32,10 @@ docker: ## Test deployment in a docker container
 docker-compose: ## Test deployment in a docker container via the docker compose file
 	docker-compose build
 	docker-compose up -d
+
+.PHONY: install-requirements
+install-requirements: 
+	pip install -r requirements.txt
+
+.PHONY: all
+all:	install-requirements generate-letterpaper docker-compose
