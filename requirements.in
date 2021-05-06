@@ -3,4 +3,4 @@ cairosvg==2.3.1
 Flask==1.1.1
 svgwrite==1.1.12
 Click==7.0
-svglib==0.9.2
+svglib==0.9.4
